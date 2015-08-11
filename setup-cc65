@@ -1,10 +1,20 @@
+# Setup for cc65 compiler
+
+# Run this file from ~/.bash_profile or the command line with the dot command:
+# . ./setup-cc65
+
+# Configure the location of the cc65 compiler here:
 CC65_HOME=$HOME/opt/cc65
+
+# Nothing should need changed below this point.
+
+# Add the compiler to the PATH.
 PATH=$PATH:$CC65_HOME/bin
 
-# Required variables for cc65:
+# Required variables for cc65
 CC65_INC=$CC65_HOME/include
 LD65_LIB=$CC65_HOME/lib
 LD65_CFG=$CC65_HOME/cfg
 
+# Make these variables available to subsequent programs.
 export CC65_HOME PATH CC65_INC LD65_LIB LD65_CFG
-
