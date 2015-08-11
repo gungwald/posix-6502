@@ -1,0 +1,10 @@
+CC65_HOME=$HOME/opt/cc65
+PATH=$PATH:$CC65_HOME/bin
+
+# Required variables for cc65:
+CC65_INC=$CC65_HOME/include
+LD65_LIB=$CC65_HOME/lib
+LD65_CFG=$CC65_HOME/cfg
+
+export CC65_HOME PATH CC65_INC LD65_LIB LD65_CFG
+
