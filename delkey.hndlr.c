@@ -15,17 +15,24 @@
 
 */
 
-void install_delete_key_handler(void);
-void delete_key_handler(void);
+/* Types */
+typedef char   byte_t;
+typedef byte_t *addr_t;
+typedef addr_t *indirect_addr_t;
 
-char **vectout = (char **) 0xbe30;
-char **vectin  = (char **) 0xbe32
-#define KBD     (char *) 0xc000
-#define KBDSTRB (char *) 0xc010
+/* Function declarations */
+static void install_delete_key_handler(void);
+static void delete_key_handler(void);
 
-#define DELKEY  (char) 0x7f
-#define BACKSPC (char) 0x8
+/* Constants */
+const addr_t KBD = (addr_t) 0xc000;
+const addr_t KBDSTRB = (addr_t) 0xc010;
+const char DELKEY = (char) 0x7f;
+const char BACKSPC = (char) 0x8;
 
+/* Global vars */
+static indirect_addr_t vectout = (indirect_addr_t) 0xbe30;
+static indirect_addr_t vectin  = (indirect_addr_t) 0xbe32;
 static char *chained_vectin;
 
 void main()
