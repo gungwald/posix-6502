@@ -17,7 +17,7 @@ DISK=posix.dsk
 PGMS=cat chartest date delkey.hndlr vi more uname
 BASIC_AUX_TYPE=0x0801
 READ_TIME_LOAD_ADDR=0x0260
-AC=java -jar AppleCommander-1.3.5.14-ac.jar
+AC=java -jar AppleCommander-1.3.5.14.jar
 SYS_LOAD_ADDR=0x2000
 BIN_LOAD_ADDR=0x0803
 MKDISK=$(AC) -pro140 $(DISK) $(DISK)
@@ -27,11 +27,18 @@ MKDISK=$(AC) -pro140 $(DISK) $(DISK)
 all: $(DISK)
 
 $(DISK): $(PGMS) 
-	if [! -f $(DISK) ]; then $(MKDISK); fi
+	if [ ! -f $(DISK) ]; \
+	then \
+	    $(MKDISK); \
+	else \
+	    for PGM in $(PGMS); \
+	    do \
+		    $(AC) -d $(DISK) $$PGM; \
+	    done \
+	fi
 	for PGM in $(PGMS); \
 	do \
-		$(AC) -d $(DISK) $PGM; \
-		$(AC) -cc65 $(DISK) $PGM bin $(BIN_LOAD_ADDR) < $PGM; \
+		$(AC) -cc65 $(DISK) $$PGM bin $(BIN_LOAD_ADDR) < $$PGM; \
 	done
 
 cat: cat.c

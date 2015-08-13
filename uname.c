@@ -7,8 +7,8 @@
 #define CPU_65816_NAME "65816"
 #define CPU_UNKNOWN "Unknown"
 
-static char *get_cpu_name();
-static char *get_machine_hardware_name();
+static char *get_cpu_name(void);
+static char *get_machine_hardware_name(void);
 
 void main()
 {

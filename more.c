@@ -63,7 +63,7 @@ const char NULL_CHAR        = '\0';
 const char LINE_FEED        = '\n';     /* Formal name for a new line character */
 const char DELETE           = '\x7f';   /* Decimal 127 */
 
-char *input_file_name();
+char *input_file_name(void);
 void more(char *file_name);
 uint8_t chomp(char *line);
 char *trunc(char *s, size_t max_len);
