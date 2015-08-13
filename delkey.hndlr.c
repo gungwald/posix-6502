@@ -33,7 +33,7 @@ const char BACKSPC = (char) 0x8;
 /* Global vars */
 static indirect_addr_t vectout = (indirect_addr_t) 0xbe30;
 static indirect_addr_t vectin  = (indirect_addr_t) 0xbe32;
-static char *chained_vectin;
+static addr_t chained_vectin;
 
 void main()
 {
@@ -42,8 +42,8 @@ void main()
 
 void install_delete_key_handler()
 {
-    chained_vectin = *VECTIN;
-    *VECTIN = (char *) &delete_key_handler;
+    chained_vectin = *vectin;
+    *vectin = (addr_t) &delete_key_handler;
 }
 
 void delete_key_handler()
