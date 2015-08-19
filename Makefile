@@ -14,10 +14,10 @@ CC=cl65
 CFLAGS=-O -t $(CC65_TARGET)
 LDFLAGS=-t $(CC65_TARGET) -m $(PROGRAM).map
 DISK=posix.dsk
-PGMS=cat chartest date delkey.hndlr vi more uname
+PGMS=cat chartest date delkeyhndlr vi more uname od
 BASIC_AUX_TYPE=0x0801
 READ_TIME_LOAD_ADDR=0x0260
-AC=java -jar AppleCommander-1.3.5.14.jar
+AC=java -jar lib/AppleCommander-1.3.5.14.jar
 SYS_LOAD_ADDR=0x2000
 BIN_LOAD_ADDR=0x0803
 MKDISK=$(AC) -pro140 $(DISK) $(DISK)
@@ -49,11 +49,13 @@ date: date.c
 
 vi: vi.c
 
-delkey.hndlr: delkey.hndlr.c
+delkeyhndlr: delkeyhndlr.c
 
 more: more.c
 
 uname: uname.c
+
+od: od.c
 
 %: %.c
 	$(CC) $(CFLAGS) -o $@ $<

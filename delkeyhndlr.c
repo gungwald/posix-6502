@@ -1,5 +1,4 @@
 /*
-
  Delete key input handler - Makes Apple2 Delete key work like a user would 
                             expect. Because of its position on the keyboard,
                             it should work like the Backspace key on a PC
@@ -12,8 +11,9 @@
 
  TODO Include references in comments so info can be validated.
  TODO Include option to work in DOS 3.3
-
 */
+
+#include <stdbool.h>
 
 /* Types */
 typedef char   byte_t;
@@ -24,16 +24,19 @@ typedef addr_t *indirect_addr_t;
 static void install_delete_key_handler(void);
 static void delete_key_handler(void);
 
-/* Constants */
-const addr_t KBD = (addr_t) 0xc000;
-const addr_t KBDSTRB = (addr_t) 0xc010;
-const char DELKEY = (char) 0x7f;
-const char BACKSPC = (char) 0x8;
+/* Constants - absolute memory locations must be #define'd to be optimized by the compiler*/
+#define KBD     ((addr_t) 0xc000)
+#define KBDSTRB ((addr_t) 0xc010)
+#define VECTOUT ((indirect_addr_t) 0xbe30)
+#define VECTIN  ((indirect_addr_t) 0xbe32)
+#define DELKEY  ((char) 0x7f)
+#define BACKSPC ((char) 0x08)
+
+#define IS_KEYBOARD_STROBE_ON() (*KBDSTRB & 0x80)
+#define SET_KEYBOARD_STROBE()   *KBDSTRB |=  0x80
 
 /* Global vars */
-static indirect_addr_t vectout = (indirect_addr_t) 0xbe30;
-static indirect_addr_t vectin  = (indirect_addr_t) 0xbe32;
-static addr_t chained_vectin;
+static addr_t previous_vectin;
 
 void main()
 {
@@ -42,19 +45,19 @@ void main()
 
 void install_delete_key_handler()
 {
-    chained_vectin = *vectin;
-    *vectin = (addr_t) &delete_key_handler;
+    previous_vectin = *VECTIN;
+    *VECTIN = (addr_t) &delete_key_handler;
 }
 
 void delete_key_handler()
 {
-    if (*KBDSTRB & 0x80) {
+    if (IS_KEYBOARD_STROBE_ON()) {
         if (*KBD == DELKEY) {
             *KBD = BACKSPC;
-            *KBDSTRB |= 0x80;
+            SET_KEYBOARD_STROBE();
         }
     }
-    __asm__("jmp %v", chained_vectin);
+    __asm__("jmp %v", previous_vectin);
 }
 
 /*

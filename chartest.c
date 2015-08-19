@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <limits.h>
+#include <string.h> /* size_t */
 
 void main()
 {
@@ -10,11 +11,13 @@ void main()
     short int s;
     int i;
     long int l;
+    size_t z;
 
     printf("char      = %d bytes\n", sizeof(c));
     printf("short int = %d bytes\n", sizeof(s));
     printf("int       = %d bytes\n", sizeof(i));
     printf("long int  = %d bytes\n", sizeof(l));
+    printf("size_t    = %d bytes\n", sizeof(z));
     puts("");
 
     printf("CHAR_BIT  = %11hhd    CHAR_MIN  = %11hhd    CHAR_MAX  = %11hhd\n", CHAR_BIT, CHAR_MIN, CHAR_MAX);

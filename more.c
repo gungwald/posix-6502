@@ -255,12 +255,14 @@ void more(char *file_name)
 uint8_t chomp(char *line)
 {
     size_t i;
-    size_t len;
     size_t count = 0;
 
-    len = strlen(line);
-    /* i cannot go negative */
-    for (i = len; i > 0; ) {
+    i = strlen(line);
+    /* i cannot be allowed to go negative because it is unsigned.
+       This is the only loop that guarantees i stays positive.
+       If an "i >= 0" condition is used, i must go negative to
+       exit the loop. We don't want that. */
+    while (i > 0) {
         --i;
         if (line[i] == '\r' || line[i] == '\n') {
             line[i] = '\0';
