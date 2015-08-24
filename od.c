@@ -10,6 +10,9 @@
 #define BUF_SIZE 256
 #define AT_EOLN(count) (count % 16 == 0)
 #define MAX_COLUMNS 16
+#define TRACE(s) printf(s)
+#define TRACE1(s,p1) printf(s,p1)
+#define TRACE2(s,p1,p2) printf(s,p1,p2)
 
 /* Function declarations */
 static void read_input_file_name(void);
@@ -44,6 +47,7 @@ int main(int argc, char *argv[])
 
 static void read_input_file_name()
 {
+    printf("File:");
     fgets(G_input_file_name, MAX_PATH+1, stdin);
     chomp(G_input_file_name);
 }
@@ -115,7 +119,7 @@ static void hex_dump_stream(FILE *f)
     size_t reed_count;
 
     while (!feof(f) && !ferror(f)) {
-        reed_count = fread(G_buffer, BUF_SIZE, sizeof(char), f);
+        reed_count = fread(G_buffer, sizeof(char), BUF_SIZE, f);
 
         /* Check for errors now so there is no chance of errno being reset. */
         if (ferror(f)) {
@@ -139,10 +143,10 @@ static void write_bytes(char *bytes, size_t byte_count)
 
     for (/* i = 0 */ ; i < byte_count; ++i, ++G_total_byte_count) {
         if (G_column == 1) {
-            printf("%06x", G_total_byte_count);
+            printf("%06zx", G_total_byte_count);
         }
 
-        printf(" %02x", bytes[i]);
+        printf(" %02hhx", bytes[i]);
 
         if (G_column == MAX_COLUMNS) {
             /* At end of line. */

@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>     /* strlen */
-#include <time.h>       /* time, ctime */
+#include <time.h>       /* time_t, time, ctime */
 #include <errno.h>
 
 /*
@@ -70,10 +70,10 @@ void display_date_time()
     time_t now;
     char *formatted_time;
 
-    if (*MONTH_DAY_ADDR == 0) {
+/*    if (*MONTH_DAY_ADDR == 0) {
         puts("The date and time have not been set.");
     }
-    else if (time(&now) == -1 ) {
+    else */ if (time(&now) == -1 ) {
         printf("errno=%d\n", errno);
         perror("time");
     }

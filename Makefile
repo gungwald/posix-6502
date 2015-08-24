@@ -12,19 +12,20 @@ endif
 
 CC=cl65
 CFLAGS=-O -t $(CC65_TARGET)
-LDFLAGS=-t $(CC65_TARGET) -m $(PROGRAM).map
-DISK=posix.dsk
-PGMS=cat chartest date delkeyhndlr vi more uname od
+LDFLAGS=-t $(CC65_TARGET)
+DISK_VOL=posix
+DISK=$(DISK_VOL).dsk
+PGMS=cat chartest date delkeyhndlr vi more uname od hex2dec
 BASIC_AUX_TYPE=0x0801
 READ_TIME_LOAD_ADDR=0x0260
 AC=java -jar lib/AppleCommander-1.3.5.14.jar
 SYS_LOAD_ADDR=0x2000
 BIN_LOAD_ADDR=0x0803
-MKDISK=$(AC) -pro140 $(DISK) $(DISK)
+MKDISK=$(AC) -pro140 $(DISK) $(DISK_VOL)
 
 ########################################
 
-all: $(DISK)
+all: $(PGMS)
 
 $(DISK): $(PGMS) 
 	if [ ! -f $(DISK) ]; \
@@ -38,28 +39,54 @@ $(DISK): $(PGMS)
 	fi
 	for PGM in $(PGMS); \
 	do \
-		$(AC) -cc65 $(DISK) $$PGM bin $(BIN_LOAD_ADDR) < $$PGM; \
+		$(AC) -cc65 $(DISK) $$PGM BIN < $$PGM; \
 	done
 
-cat: cat.c
+cat: cat.o
+	$(CC) $(LDFLAGS) -o $@ $^
+	$(AC) -d $(DISK) $@
+	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-chartest: chartest.c
+chartest: chartest.o
+	$(CC) $(LDFLAGS) -o $@ $^
+	$(AC) -d $(DISK) $@
+	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-date: date.c
+date: date.o
+	$(CC) $(LDFLAGS) -o $@ $^
+	$(AC) -d $(DISK) $@
+	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-vi: vi.c
+vi: vi.o
+	$(CC) $(LDFLAGS) -o $@ $^
+	$(AC) -d $(DISK) $@
+	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-delkeyhndlr: delkeyhndlr.c
+delkeyhndlr: delkeyhndlr.o
+	$(CC) $(LDFLAGS) -o $@ $^
+	$(AC) -d $(DISK) $@
+	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-more: more.c
+more: more.o
+	$(CC) $(LDFLAGS) -o $@ $^
+	$(AC) -d $(DISK) $@
+	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-uname: uname.c
+uname: uname.o
+	$(CC) $(LDFLAGS) -o $@ $^
+	$(AC) -d $(DISK) $@
+	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-od: od.c
+od: od.o
+	$(CC) $(LDFLAGS) -o $@ $^
+	$(AC) -d $(DISK) $@
+	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-%: %.c
-	$(CC) $(CFLAGS) -o $@ $<
+hex2dec: hex2dec.o
+	$(CC) $(LDFLAGS) -o $@ $^
+	$(AC) -d $(DISK) $@
+	$(AC) -cc65 $(DISK) $@ BIN < $@
 
 clean:
-	$(RM) $(PGMS)
+	$(RM) *.o $(PGMS)
 
