@@ -1,0 +1,25 @@
+# Vim swap files
+.*.swp
+
+# Compiled Java
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Packaged Java components
+*.jar
+*.war
+*.ear
+
+# JVM crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# C development
+*.exe
+*.o
+Debug/
+Release/
+
+# Mac
+.DS_Store

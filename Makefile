@@ -11,11 +11,16 @@ ifndef CC65_TARGET
 endif
 
 CC=cl65
-CFLAGS=-O -t $(CC65_TARGET)
+AS=ca65
+LD=ld65
+
+CFLAGS=-t $(CC65_TARGET) -O
+ASFLAGS=-t $(CC65_TARGET)
 LDFLAGS=-t $(CC65_TARGET)
+
 DISK_VOL=posix
 DISK=$(DISK_VOL).dsk
-PGMS=cat chartest date delkeyhndlr vi more uname od hex2dec
+PGMS=cat chartest date delkeyhndlr vi more uname od hex2dec map.del2bkspc
 BASIC_AUX_TYPE=0x0801
 READ_TIME_LOAD_ADDR=0x0260
 AC=java -jar lib/AppleCommander-1.3.5.14.jar
@@ -83,6 +88,11 @@ od: od.o
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
 hex2dec: hex2dec.o
+	$(CC) $(LDFLAGS) -o $@ $^
+	$(AC) -d $(DISK) $@
+	$(AC) -cc65 $(DISK) $@ BIN < $@
+
+map.del2bkspc: map.del2bkspc.o
 	$(CC) $(LDFLAGS) -o $@ $^
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
