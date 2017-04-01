@@ -14,6 +14,7 @@ BACKSPC = $08
 
 BASL    = $28
 KSWL    = $38
+KSWH    = $39
 
 ; Horizontal position <8O-column>
 OURCH   = $0578
@@ -58,7 +59,7 @@ done:
         LDA #<DELHND
         STA KSWL
         LDA #>DELHND
-        STA KSWL+1
+        STA KSWH
         RTS
 
 ; This is the new input subroutine
