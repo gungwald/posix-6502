@@ -19,7 +19,8 @@ KSWH    = $39
 ; Horizontal position <8O-column>
 OURCH   = $0578
 
-COUT    = $fded ;Standard character output routine
+cout    = $fded ;Standard character output routine
+crout	= $fd8e ;Write carriage return
 KBD     = $c000 ;Keyboard data and strobe
 KBDSTRB = $C010 ;Clear keyboard strobe 
 
@@ -42,6 +43,20 @@ PICK    = $CF01 ;Pick character off screen
         BNE done        ;No, so branch
         LDA #BACKSPC    ;Replace DELETE with BACKSPC
 done:
+.endmacro
+
+.macro writeln line
+    	.local nextCh
+	.local done
+	ldx #0		;Start with character at index 0
+nextCh: lda line,x	;Load character into accumulator
+	cmp #0		;Check for end of string NULL
+	beq done	;Branch to done if end of string
+	and #$80	;Turn on bit 7 for output
+	jsr cout	;Write the character
+	inx		;Increment the string index
+	jmp nextCh	;Write the next character
+done:	jsr crout	;Write a carriage return
 .endmacro
 
 ; *************************************
