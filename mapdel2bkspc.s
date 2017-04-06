@@ -56,15 +56,15 @@ done:
 
 ; Setup new input link
 
-        LDA #<DELHND
+        LDA #<HNDDEL
         STA KSWL
-        LDA #>DELHND
+        LDA #>HNDDEL
         STA KSWH
         RTS
 
 ; This is the new input subroutine
 
-DELHND: BIT ALTCHAR     ;80-column firmware in use?
+HNDDEL: BIT ALTCHAR     ;80-column firmware in use?
         BMI DELH80      ;Yes, so branch
 GETKBD: BIT KBD         ;Key pressed?
         BPL GETKBD      ;No, so branch
