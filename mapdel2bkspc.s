@@ -52,7 +52,7 @@ done:
 nextCh: lda line,x	;Load character into accumulator
 	cmp #0		;Check for end of string NULL
 	beq done	;Branch to done if end of string
-	and #$80	;Turn on bit 7 for output
+	ora #$80	;Turn on bit 7 for output
 	jsr cout	;Write the character
 	inx		;Increment the string index
 	jmp nextCh	;Write the next character

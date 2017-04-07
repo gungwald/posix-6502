@@ -19,16 +19,14 @@ void main(void)
 {
     printf("Hexidecimal number:");
     fgets(hex, NUM_SIZE, stdin);
-    dump(hex);
     fixup(hex);
-    dump(hex);
 
     /* Can't tell strtoul valid from invalid return value, so checking errno
        is required, which requires it to be preset to 0. */
     errno = 0;
     decimal = strtoul(hex, &first_invalid_char, 16);
     if (errno == 0) {
-        printf("$%s=%lu\n", hex, decimal);
+        printf("%lu\n", decimal);
         if (*first_invalid_char != '\0') {
             printf("Conversion ended prematurely at '%c'=$%02hhX with '%s' remaining.\n", first_invalid_char[0], first_invalid_char[0], first_invalid_char);
         }
