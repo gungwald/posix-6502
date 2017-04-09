@@ -1,0 +1,6 @@
+#!/bin/sh
+
+BIN_DIR=`pwd`
+echo Appending $BIN_DIR to PATH.
+PATH=$PATH:$BIN_DIR
+export PATH

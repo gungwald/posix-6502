@@ -12,13 +12,10 @@ static char *get_machine_hardware_name(void);
 
 void main()
 {
-    clrscr();
     cputs(get_machine_hardware_name());
     cputc(' ');
     cputs(get_cpu_name());
-    cputs("\r\n");
-
-    getchar();
+    cputs("\n");
 }
 
 char *get_cpu_name()

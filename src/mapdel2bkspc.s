@@ -34,7 +34,9 @@ GETKEY  = $CB15 ;Get character from keyboard
 INVERT  = $CEDD ;Invert character on screen
 PICK    = $CF01 ;Pick character off screen
 
-.segment	"BSS"
+.segment	"RODATA"
+
+debug1:	.asciiz	"Hello"
 
 .macro mapDeleteToBackspace
 ; The character must be in the accumulator.
@@ -56,7 +58,9 @@ nextCh: lda line,x	;Load character into accumulator
 	jsr cout	;Write the character
 	inx		;Increment the string index
 	jmp nextCh	;Write the next character
-done:	jsr crout	;Write a carriage return
+done:	
+	lda #$8d
+	jsr cout	;Write a carriage return
 .endmacro
 
 ; *************************************
@@ -69,8 +73,18 @@ done:	jsr crout	;Write a carriage return
 
 .proc   _main:  near
 
+.segment    "CODE"
+
 ; Setup new input link
 
+	lda #$c0
+	jsr cout
+	rts
+	lda #$8d
+	jsr cout	;Write a carriage return
+	rts
+	writeln	debug1
+	rts
         LDA #<HNDDEL
         STA KSWL
         LDA #>HNDDEL
