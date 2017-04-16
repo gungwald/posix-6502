@@ -80,9 +80,9 @@ hex2dec: hex2dec.o
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
 mapdel2bkspc: mapdel2bkspc.o
-	$(CC) $(LDFLAGS) -o $@ $^
+	cl65 $^ --target none --start-addr 0x0803 -o $@
 	$(AC) -d $(DISK) $@
-	$(AC) -cc65 $(DISK) $@ BIN < $@
+	$(AC) -p $(DISK) $@ BIN 0x0803 < $@
 
 helloworld: helloworld.o
 	cl65 $^ --target none --start-addr 0x0803 -o $@

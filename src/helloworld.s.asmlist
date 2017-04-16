@@ -1,0 +1,28 @@
+ca65 V2.15 - Git cbb2833
+Main file   : helloworld.s
+Current file: helloworld.s
+
+000000r 1               
+000000r 1               cout    = $fded 	;Standard character output routine
+000000r 1               crout	= $fd8e 	;Write carriage return
+000000r 1               
+000000r 1               .segment	"RODATA"
+000000r 1               
+000000r 1  48 65 6C 6C  hello:	.asciiz	"Hello world"
+000004r 1  6F 20 77 6F  
+000008r 1  72 6C 64 00  
+00000Cr 1               
+00000Cr 1               .segment    	"CODE"
+000000r 1               
+000000r 1  A2 00        	ldx 	#0	;Start with character at index 0
+000002r 1               nextCh:
+000002r 1  BD rr rr     	lda 	hello,x	;Load character into accumulator
+000005r 1  C9 00        	cmp 	#0	;Check for end of string NULL
+000007r 1  F0 09        	beq 	done	;Branch to done if end of string
+000009r 1  09 80        	ora 	#$80	;Turn on bit 7 for output
+00000Br 1  20 ED FD     	jsr 	cout	;Write the character
+00000Er 1  E8           	inx		;Increment the string index
+00000Fr 1  4C rr rr     	jmp 	nextCh	;Write the next character
+000012r 1               done:
+000012r 1  60           	rts
+000012r 1               

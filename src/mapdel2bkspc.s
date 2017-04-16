@@ -1,13 +1,6 @@
-;************************
-; MODIFY KEYBOARD INPUT *
-;************************
-
-; BRUN this program from disk
-
-.forceimport	__STARTUP__
-.export		_main
-.segment	"RODATA"
-
+;****************************
+; Map Delete key to backspace
+;****************************
 
 DELETE  = $7F
 BACKSPC = $08
@@ -36,7 +29,8 @@ PICK    = $CF01 ;Pick character off screen
 
 .segment	"RODATA"
 
-debug1:	.asciiz	"Hello"
+loaded:	.asciiz	"Input link loaded"
+debug1:	.asciiz	"Debug1"
 
 .macro mapDeleteToBackspace
 ; The character must be in the accumulator.
@@ -71,29 +65,19 @@ done:
 
 .segment    "CODE"
 
-.proc   _main:  near
-
-.segment    "CODE"
-
 ; Setup new input link
 
-	lda #$c0
-	jsr cout
-	rts
-	lda #$8d
-	jsr cout	;Write a carriage return
-	rts
-	writeln	debug1
-	rts
         LDA #<HNDDEL
         STA KSWL
         LDA #>HNDDEL
         STA KSWH
+	writeln	loaded
         RTS
 
 ; This is the new input subroutine
 
 HNDDEL: BIT ALTCHAR     ;80-column firmware in use?
+	writeln debug1
         BMI DELH80      ;Yes, so branch
 GETKBD: BIT KBD         ;Key pressed?
         BPL GETKBD      ;No, so branch
@@ -123,6 +107,3 @@ CONT2:  CMP #$9B        ;Is it an ESC?
 CLRCUR: JSR INVERT      ;Remove the cursor
         STA CXROMOFF    ;Re-enable slot ROMs
         RTS
-
-.endproc
-
