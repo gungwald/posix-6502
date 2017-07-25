@@ -21,7 +21,7 @@ HD_URL=https://mirrors.apple2.org.za/ftp.apple.asimov.net/images/masters/prodos/
 all: test
 
 test: $(ROM) $(HD) $(DISK)
-	gsportx $(DISK)
+	gsport
 
 $(ROM): xgs.rom
 	mv xgs.rom $(ROM)
@@ -32,9 +32,6 @@ xgs.rom: $(ROM_ZIP)
 	
 $(ROM_ZIP):
 	wget --output-document=$(ROM_ZIP) $(ROM_URL)
-
-$(PRODOS_DSK):
-	wget --output-document=$(PRODOS_DSK) $(PRODOS_URL)
 
 $(HD): PRODOS QUIT.SYSTEM BITSY.BOOT BASIC.SYSTEM COPYIIPLUS.7.2
 	$(AC) -d $(HD) PRODOS
@@ -63,5 +60,9 @@ BASIC.SYSTEM: $(PRODOS_DSK)
 COPYIIPLUS.7.2: $(PRODOS_DSK)
 	$(AC) -g $(PRODOS_DSK) COPYIIPLUS.7.2 COPYIIPLUS.7.2
 
+$(PRODOS_DSK):
+	wget --output-document=$(PRODOS_DSK) $(PRODOS_URL)
+
 clean:
 	$(RM) $(ROM) $(ROM_ZIP) $(PRODOS_DSK) PRODOS QUIT.SYSTEM BASIC.SYSTEM BITSY.BOOT COPYIIPLUS.7.2 xgs.rom
+

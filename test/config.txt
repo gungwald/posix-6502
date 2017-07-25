@@ -27,7 +27,7 @@ bram1[b0] = ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
 bram1[c0] = ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
 bram1[d0] = ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
 bram1[e0] = ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff
-bram1[f0] = ff ff ff ff ff ff ff ff ff ff ff ff 8e b9 24 13
+bram1[f0] = ff ff ff ff ff ff ff ff ff ff ff ff 13 24 b9 8e
 
 bram3[00] = 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 bram3[10] = 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00

@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <conio.h>  /* clrscr */
 #include <6502.h>   /* getcpu */
 
 #define CPU_6502_NAME "6502"
@@ -12,10 +11,7 @@ static char *get_machine_hardware_name(void);
 
 void main()
 {
-    cputs(get_machine_hardware_name());
-    cputc(' ');
-    cputs(get_cpu_name());
-    cputs("\n");
+    printf("%s %s\n", get_machine_hardware_name(), get_cpu_name());
 }
 
 char *get_cpu_name()
