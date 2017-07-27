@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <6502.h>   /* getcpu */
+#include <apple2.h> /* get_ostype */
 
 #define CPU_6502_NAME "6502"
 #define CPU_65C02_NAME "65C02"

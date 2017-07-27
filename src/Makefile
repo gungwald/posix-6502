@@ -17,15 +17,14 @@ ASFLAGS=-t $(CC65_TARGET)
 LDFLAGS=-t $(CC65_TARGET)
 
 DISK_VOL=posix
-#DISK=$(DISK_VOL).dsk
-DISK=../test/testhd.hdv
+DISK=$(DISK_VOL).dsk
+#DISK=../test/testhd.hdv
 PGMS=cat chartest date delkeyhndlr vi more uname od hex2dec mapdel2bkspc helloworld
 BASIC_AUX_TYPE=0x0801
 READ_TIME_LOAD_ADDR=0x0260
 AC=java -jar ../lib/AppleCommander-1.3.5.14.jar
 SYS_LOAD_ADDR=0x2000
 BIN_LOAD_ADDR=0x0803
-MKDISK=$(AC) -pro140 $(DISK) $(DISK_VOL)
 
 ########################################
 
@@ -34,71 +33,77 @@ all: $(PGMS)
 test: $(PGMS)
 	(cd ../test; make)
 
-cat: cat.o
-	$(CC) $(LDFLAGS) -o $@ $^
+cat: cat.o $(DISK)
+	$(CC) $(LDFLAGS) -o $@ $<
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-chartest: chartest.o
-	$(CC) $(LDFLAGS) -o $@ $^
+cat.o: cat.c
+
+
+chartest: chartest.o $(DISK)
+	$(CC) $(LDFLAGS) -o $@ $<
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-date: date.o
-	$(CC) $(LDFLAGS) -o $@ $^
+date: date.o $(DISK)
+	$(CC) $(LDFLAGS) -o $@ $<
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-vi: vi.o
-	$(CC) $(LDFLAGS) -o $@ $^
+vi: vi.o $(DISK)
+	$(CC) $(LDFLAGS) -o $@ $<
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-delkeyhndlr: delkeyhndlr.o
-	$(CC) $(LDFLAGS) -o $@ $^
+delkeyhndlr: delkeyhndlr.o $(DISK)
+	$(CC) $(LDFLAGS) -o $@ $<
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-more: more.o
-	$(CC) $(LDFLAGS) -o $@ $^
+more: more.o $(DISK)
+	$(CC) $(LDFLAGS) -o $@ $<
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-uname: uname.o
-	$(CC) $(LDFLAGS) -o $@ $^
+uname: uname.o $(DISK)
+	$(CC) $(LDFLAGS) -o $@ $<
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-od: od.o
-	$(CC) $(LDFLAGS) -o $@ $^
+od: od.o $(DISK)
+	$(CC) $(LDFLAGS) -o $@ $<
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-hex2dec: hex2dec.o
-	$(CC) $(LDFLAGS) -o $@ $^
+hex2dec: hex2dec.o $(DISK)
+	$(CC) $(LDFLAGS) -o $@ $<
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-mapdel2bkspc: mapdel2bkspc.o
-	cl65 $^ --target none --start-addr 0x0803 -o $@
+mapdel2bkspc: mapdel2bkspc.o $(DISK)
+	cl65 $< --target none --start-addr 0x0803 -o $@
 	$(AC) -d $(DISK) $@
 	$(AC) -p $(DISK) $@ BIN 0x0803 < $@
 
-helloworld: helloworld.o
-	cl65 $^ --target none --start-addr 0x0803 -o $@
+helloworld: helloworld.o $(DISK)
+	cl65 $< --target none --start-addr 0x0803 -o $@
 	$(AC) -d $(DISK) $@
 	$(AC) -p $(DISK) $@ BIN 0x0803 < $@
 
 helloworld.o: helloworld.s
-	ca65 -l $^.asmlist -D BASE=0X0803 $^
+	ca65 -l $<.asmlist -D BASE=0X0803 $<
 
-helloworld2: helloworld2.o
-	ld65 -t $(CC65_TARGET) -o $@ $^
+helloworld2: helloworld2.o $(DISK)
+	ld65 -t $(CC65_TARGET) -o $@ $<
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
 helloworld2.o: helloworld2.s
-	ca65 -t $(CC65_TARGET) $^
+	ca65 -t $(CC65_TARGET) $<
+
+$(DISK):
+	$(AC) -pro140 $(DISK) $(DISK_VOL)
 
 clean:
 	$(RM) *.o $(PGMS)

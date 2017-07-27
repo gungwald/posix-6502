@@ -1,0 +1,384 @@
+$00             UNK     Unknown
+$01             BAD     Bad blocks
+$02             PCD     Apple /// Pascal code
+$03             PTX     Apple /// Pascal text
+$04             TXT     ASCII text
+$05             PDA     Apple /// Pascal data
+$06             BIN     Binary
+$06     $0005           Paint 256 Brush
+$06     $0006           Paint 256 Pattern
+$06     $0007           Paint 256 Palette
+$06     $0100           PublishIt parmfile
+$06     $0300           FrEdWriter Appleio binary file
+$06     $0330           Get Len file
+$06     $0800           ProSel load file
+$06     $2008           Star Trek font
+$06     $200C           Star font
+$06     $4000           Sneeze Utilities
+$06     $5000           HyperFormat binary file
+$06     $8000           ProSel specs/params file
+$06     $9000           PublishIt main file
+$06     $9100           ProSel user function
+$06     $A000           Formater Data
+$06     $AEFC           ReadyLink Comm config.
+$06     $AF00           AE Macro file
+$07             FNT     Apple /// Font
+$08             FOT     Apple II or /// Graphics
+$08     $4000           Packed Hi-Res Image
+$08     $4001           Packed Double Hi-Res Image
+$08     $8000           Printographer Packer HGR file
+$08     $8001           Printographer Packed DHGR file
+$09             BA3     Apple /// BASIC program
+$0A             DA3     Apple /// BASIC data
+$0B             WPF     Apple /// Word Processor
+$0C             SOS     Apple /// SOS System
+$0D     $0001           Foundation Data
+$0F             DIR     Folder
+$0F     $0002   DIR     Active System Folder
+$10             RPD     Apple /// RPS data
+$11             RPI     Apple /// RPS index
+$12             AFD     Apple /// AppleFile discard
+$13             AFM     Apple /// AppleFile model
+$14             AFR     Apple /// AppleFile report format
+$15             SCL     Apple /// screen library
+$16             PFS     PFS document
+$16     $0001           PFS:File document
+$16     $0002           PFS:Write document
+$16     $0003           PFS:Graph document
+$16     $0004           PFS:Plan document
+$16     $0016           PFS internal data
+$19             ADB     AppleWorks Data Base
+$1A             AWP     AppleWorks Word Processor
+$1B             ASP     AppleWorks Spreadsheet
+$20             TDM     Desktop Manager document
+$21                     Instant Pascal source
+$22                     UCSD Pascal Volume
+$29                     Apple /// SOS Dictionary
+$2A             8SC     Apple II Source Code
+$2B             8OB     Apple II Object Code
+$2B     $8001           GBBS Pro Object Code
+$2C             8IC     Apple II Interpreted Code
+$2C     $8003           APEX Program File
+$2D             8LD     Apple II Language Data
+$2E             P8C     ProDOS 8 code module
+$2E     $8001           Davex 8 Command
+$2E     $8002           Point-to-Point drivers
+$2E     $8003           Point-to-Point code
+$40             DIC     Dictionary
+$41             OCR     OCR Data
+$41     $8001           InWords OCR font table
+$42             FTD     File Type Names
+$43                     Peripheral data
+$43     $8001           Express document
+$50             GWP     Apple IIGS Word Processor
+$50     $5445           Teach document
+$50     $8001           DeluxeWrite document
+$50     $8010           AppleWorks GS Word Processor
+$50     $8011           Softdisk isssue text
+$51             GSS     Apple IIGS Spreadsheet
+$51     $8010           AppleWorks GS Spreadsheet
+$52             GDB     Apple IIGS Data Base
+$52     $8001           GTv database
+$52     $8010           AppleWorks GS Data Base
+$52     $8011           AppleWorks GS DB Template
+$52     $8013           GSAS database
+$52     $8014           GSAS accounting journals
+$52     $8015           Address Manager document
+$52     $8016           Address Manager defaults
+$52     $8017           Address Manager index
+$53             DRW     Drawing
+$53     $8002           Graphic Disk Labeler document
+$53     $8010           AppleWorks GS Graphics
+$54             GDP     Desktop Publishing
+$54     $8002           GraphicWriter document
+$54     $8003           Label It document
+$54     $8010           AppleWorks GS Page Layout
+$54     $DD3E           Medley document
+$55             HMD     Hypermedia
+$55     $0001           HyperCardIIgs stack
+$55     $8001           Tutor-Tech document
+$55     $8002           HyperStudio document
+$55     $8003           Nexus document
+$55     $8004           HyperSoft stack
+$55     $8005           HyperSoft card
+$56             EDU     Educational Data
+$56     $8001           Tutor-Tech Scores
+$56     $8002           CrossWords vocabulary
+$56     $8004           CrossWords data
+$56     $8005           CrossWords fixed puzzle
+$56     $8006           CrossWords student data
+$57             STN     Stationery
+$57     $8002           GraphicWriter III stationary
+$57     $8003           Music Writer format
+$58             HLP     Help File
+$58     $8002           Davex 8 help file
+$58     $8010           AppleWorks GS help file
+$59             COM     Communications File
+$59     $8010           AppleWorks GS Communications
+$5A             CFG     Configuration file
+$5A     $0001           Quickie preferences
+$5A     $0002           Battery RAM configuration
+$5A     $0003           AutoLaunch preferences
+$5A     $0004           SetStart preferences
+$5A     $0005           GSBug configuration
+$5A     $0006           Archiver preferences
+$5A     $0007           Archiver Table of Contents
+$5A     $0008           Font Manager data
+$5A     $0009           Print manager data
+$5A     $000A           IR preferences
+$5A     $8001           Master Tracks Jr. preferences
+$5A     $8002           GraphicWriter preferences
+$5A     $8003           Z-Link configuration
+$5A     $8004           JumpStart configuration
+$5A     $8005           Davex 8 configuration
+$5A     $8006           NiftyList configuration
+$5A     $8007           GTv videodisc configuration
+$5A     $8008           GTv Warkshop configuration
+$5A     $8009           Point-to-Point preferences
+$5A     $800A           ORCA/Disassembler preferences
+$5A     $800B           SnowTerm preferences
+$5A     $800C           My Word! preferences
+$5A     $800D           Chipmunk configuration
+$5A     $8010           AppleWorks GS configuration
+$5A     $8011           SDE Shell preferences
+$5A     $8012           SDE Editor preferences
+$5A     $8013           SDE system tab ruler
+$5A     $8014           Nexus configuration
+$5A     $8015           DesignMaster preferences
+$5A     $801A           MAX/Edit keyboard template
+$5A     $801B           MAX/Edit tab ruler set
+$5A     $801C           Platinum Paint preferences
+$5A     $801E           Allison preferences
+$5A     $801F           Golf of the Americas options
+$5A     $8021           GSAS accounting setup
+$5A     $8023           Utility Launch preferences
+$5A     $8024           Softdisk configuration
+$5A     $8025           Quit-To configuration
+$5A     $8026           Big Edit Thing preferences
+$5A     $8027           ZMaker preferences
+$5A     $8028           Minstrel configuration
+$5A     $8029           WordWorks Pro preferences
+$5A     $802B           Pointless preferences
+$5A     $802E           Label It configuration
+$5A     $8030           Locator configuration file
+$5A     $8123           WriteAway preferences
+$5B             ANM     Animation file
+$5B     $8001           Cartooners movie
+$5B     $8002           Cartooners actors
+$5B     $8005           Arcard King Super document
+$5B     $8005           Arcard King DHRG document
+$5B     $8007           DreamVision movie
+$5C             MUM     Multimedia document
+$5C     $8001           GTv multimedia playlist
+$5D             ENT     Game/Entertainment document
+$5D     $8001           Solitaire Royale document
+$5D     $8002           BattleFront scenario
+$5D     $8003           BattleFront saved game
+$5D     $8004           Gold of the Americas game
+$5D     $8006           Blackjack Tutor document
+$5E             DVU     Development utility document
+$5E     $0001           Resource file
+$5E     $8001           ORCA/Disassembler template
+$5E     $8002           DesignMaster document
+$5F     $8003           Financial document
+$60             PCT     PC Transporter pre-boot driver
+$6B             BIO     PC Transporter BIOS
+$6D             TDR     PC Transporter driver
+$6E             PRE     PC Transporter pre-boot
+$6F             HDV     PC Transporter volume
+$80                     GEOS System
+$81                     GEOS desk accessory
+$82                     GEOS application
+$83                     GEOS application data
+$84                     GEOS font
+$85                     GEOS print driver
+$86                     GEOS input driver
+$87                     GEOS auxilliary driver
+$89                     GEOS system boot
+$8A                     GEOS temporary
+$8B                     GEOS auto-executable
+$8C                     GEOS clock driver
+$8D                     GEOS interface driver
+$A0             WP      WordPerfect document
+$A1                     WordPerfect macros
+$A2                     WordPerfect help
+$A3                     WordPerfect data
+$A4                     WordPerfect virtual memory
+$A5                     WordPerfect dictionary
+$AB             GSB     Apple IIGS BASIC program
+$AC             TDF     Apple IIGS BASIC TDF
+$AD             BDF     Apple IIGS BASIC data
+$B0             SRC     Apple IIGS  source code
+$B0     $0001           APW Text file
+$B0     $0003           APW 65816 Assembly source code
+$B0     $0004           BASIC source code
+$B0     $0005           ORCA/Pascal source code
+$B0     $0006           APW command file
+$B0     $0007           Small C source code
+$B0     $0008           ORCA/C source code
+$B0     $0009           APW Linker command file
+$B0     $000A           APW C source code
+$B0     $000B           Pascal source code
+$B0     $000C           ORCA/Desktop command file
+$B0     $0015           APW Rez source file
+$B0     $0017           Installer script
+$B0     $001E           TML Pascal scource code
+$B0     $0116           ORCA/Disassembler script
+$B0     $0503           SDE Assembler source code
+$B0     $0506           SDE command script
+$B0     $0601           Nifty List data
+$B0     $0719           Postscript dile
+$B0     $FFFF           ORCA/Desktop shell
+$B1             OBJ     Apple IIGS object code
+$B2             LIB     Apple IIGS Library file
+$B3             S16     GS/OS application
+$B4             RTL     GS/OS Run-Time Library
+$B5             EXE     GS/OS Shell application
+$B6             PIF     Permanent initialization file
+$B7             TIF     Temporary initialization file
+$B8             NDA     New desk accessory
+$B9             CDA     Classic desk accessory
+$BA             TOL     Tool
+$BB             DVR     Apple IIGS Device Driver File
+$BB     $0001           Printer driver
+$BB     $0002           Comm. interface driver
+$BB     $0003           AppleTalk driver
+$BB     $0101           Console driver
+$BB     $0102           AppleDisk 3.5 driver
+$BB     $0104           UniDisk 3.5 driver
+$BB     $010E           AppleDisk 5.25 driver
+$BB     $0131           SCSI interface driver
+$BB     $013F           SCSI device driver
+$BB     $0140           Multiple interface driver
+$BB     $0181           AppleTalk boot driver
+$BB     $0201           AppleTalk ROM driver
+$BB     $0203           AppleTalk RAM driver
+$BB     $0300           MIDI interface driver
+$BB     $7F01           GTv videodisc serial driver
+$BB     $7F02           GTv videodisc game port driver
+$BC             LDF     Load file (generic)
+$BC     $0001           Finder extrension
+$BC     $4001           Nifty List Module
+$BC     $4002           Super Info Module
+$BC     $4004           Twilight document
+$BC     $4006           Foundation editor module
+$BC     $4007           HyperStudio New Button Action
+$BC     $4008           HyperStudio Screen Transition
+$BC     $4009           DreamGrafix module
+$BC     $400A           HyperStudio Extra untility
+$BC     $C001           Nifty List Module (inactive)
+$BC     $C002           Super Info Module (inactive)
+$BC     $C006           Foundation editor module (inactive)
+$BD             FST     GS/OS File System Translator
+$BD     $2020           High Sierra FST
+$BF             DOC     GS/OS document
+$BF     $0801           ProSel Turtorial Document
+$C0             PNT     Packed Super Hi-Res picture
+$C0     $0000           Paintworks Packed picture
+$C0     $0001           Packed Super Hi-Res Image
+$C0     $0002           Apple Preferred Format picture
+$C0     $0003           Packed QuickDraw II PICT file
+$C0     $8000           PaintWords Gold 640 picture
+$C0     $8001           GTv background image
+$C0     $8005           DreamGrafix document
+$C1             PIC     Super Hi-Res picture
+$C1     $0000           Super Hi-Res Screen image
+$C1     $0001           QuickDraw PICT file
+$C1     $0002           Super Hi-Res 3200 color screen image
+$C1     $8000           Beagle Draw/Write PICT file
+$C1     $8001           Allison raw image document
+$C1     $8002           ThunderScan image document
+$C1     $8003           DreamGrafix document
+$C2             ANI     Paintworks animation
+$C3             PAL     Paintworks palette
+$C5             OOG     Object-oriented graphics
+$C5     $8000           Draw Plus document
+$C5     $C000           DYOH: Architecture document
+$C5     $C001           DYOH predrawn objects
+$C5     $C002           DYOH custom objects
+$C5     $C003           DYOH clipboard
+$C5     $C004           DYOH: Interiors document
+$C5     $C005           DYOH patterns
+$C5     $C006           DYOH: Landscape Document
+$C5     $C007           PyWare Document
+$C6             SCR     Script
+$C6     $8001           Davex 8 Script
+$C7             CDV     Control Panel document
+$C8             FON     Font
+$C8     $0000           Font (Standard Apple IIGS QuickDraw II Font)
+$C8     $0001           TrueType font
+$C9             FND     Finder data
+$C9     $0000           Old finder data file
+$C9     $0003           Desktop
+$CA             ICN     Icons
+$CB                     Point-to-Point auido file
+$D0                     MS GS/BeagleWrite GS file
+$D0     $8000           MS GS/BW GS document
+$D0     $8002           MS GS/BW dictionary
+$D5             MUS     Music sequence
+$D5     $0000           Music Construction Set song
+$D5     $0001           MIDI Synth sequence
+$D5     $0007           SoundSmith document
+$D5     $8002           Diversi-Tune sequence
+$D5     $8003           Master Tracks Jr. sequence
+$D5     $8004           Music Writer document
+$D5     $8005           Arcade king Super music
+$D6             INS     Instrument
+$D6     $0000           Music Construction Set inst.
+$D6     $0001           MIDI Synth instrument
+$D6     $8002           Diversi-Tune instrument
+$D7             MDI     MIDI data
+$D7     $0000           MIDI standard data
+$D7     $8001           MasterTracks Pro Sysex file
+$D8             SND     Sampled sound
+$D8     $0000           Audio IFF document
+$D8     $0001           AIFF-C document
+$D8     $0002           ASIF instrument
+$D8     $0003           Sound resource file
+$D8     $0004           MIDI Synth wave data
+$D8     $8001           HyperStudio sound
+$D8     $8002           Arcade King Super sound
+$D8     $8003           Sampled Sound resource
+$DB             DBM     DB Master document
+$DB     $0001           DB Master document
+$DF                     Command.COM config/driver file
+$E0             LBR     Archival library
+$E0     $0000           ALU library
+$E0     $0001           AppleSingle File
+$E0     $0002           AppleDouble Header File
+$E0     $0003           AppleDouble Data File
+$E0     $0004           Archiver archive
+$E0     $0005           DiskCopy disk image
+$E0     $8000           Binary II File
+$E0     $8001           AppleLink ACU document
+$E0     $8002           ShrinkIt (NuFX) document
+$E0     $8003           360 MS archive file
+$E0     $8004           Davex archived volume
+$E0     $8006           EZ Backup Saveset document
+$E0     $8007           ELS DOS 3.3 volume
+$E0     $8009           Utility Works document
+$E1     $0000           Macintosh file in MacBinary
+$E2             ATK     AppleTalk data
+$E2     $FFFF           EasyMount document
+$EE             R16     EDASM 816 relocatable file
+$EF             PAS     Pascal area
+$F0     $0000   CMD     BASIC command
+$F0     $4000   CMD     ProSel commands
+$F1                     User #1
+$F2                     User #2
+$F2     $1001           FolderJump
+$F3                     User #3
+$F4                     User #4
+$F5                     User #5
+$F6                     User #6
+$F7                     User #7
+$F8                     User #8
+$F8     $C323           PrintShop GS graphics
+$F9             OS      GS/OS System file
+$FA             INT     Integer BASIC program
+$FB             IVR     Integer BASIC variables
+$FC             BAS     AppleSoft BASIC program
+$FD             VAR     AppleSoft BASIC variables
+$FE             REL     Relocatable code
+$FF             SYS     ProDOS 8 application
+$FF     $C004           MouseTalk session file

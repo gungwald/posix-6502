@@ -2,13 +2,13 @@
 
 DISK_VOL=posix
 DISK=../src/$(DISK_VOL).dsk
+#DISK=testhd.hdv
 BASIC_AUX_TYPE=0x0801
 READ_TIME_LOAD_ADDR=0x0260
 AC=java -jar ../lib/AppleCommander-1.3.5.14.jar
 SYS_LOAD_ADDR=0x2000
 BIN_LOAD_ADDR=0x0803
 MKDISK=$(AC) -pro140 $(DISK) $(DISK_VOL)
-HD=testhd.hdv
 ROM=ROM.1
 ROM_ZIP=gsrom01.zip
 PRODOS_DSK=prodos-2.4.1.dsk
@@ -20,7 +20,7 @@ HD_URL=https://mirrors.apple2.org.za/ftp.apple.asimov.net/images/masters/prodos/
 
 all: test
 
-test: $(ROM) $(HD) $(DISK)
+test: $(ROM) $(DISK)
 	gsport
 
 $(ROM): xgs.rom
@@ -33,17 +33,17 @@ xgs.rom: $(ROM_ZIP)
 $(ROM_ZIP):
 	wget --output-document=$(ROM_ZIP) $(ROM_URL)
 
-$(HD): PRODOS QUIT.SYSTEM BITSY.BOOT BASIC.SYSTEM COPYIIPLUS.7.2
-	$(AC) -d $(HD) PRODOS
-	#$(AC) -d $(HD) QUIT.SYSTEM
-	#$(AC) -d $(HD) BITSY.BOOT
-	$(AC) -d $(HD) BASIC.SYSTEM
-	$(AC) -d $(HD) COPYIIPLUS.7.2
-	$(AC) -p $(HD) PRODOS SYS < PRODOS
-	#$(AC) -p $(HD) QUIT.SYSTEM SYS < QUIT.SYSTEM
-	#$(AC) -p $(HD) BITSY.BOOT SYS < BITSY.BOOT
-	$(AC) -p $(HD) BASIC.SYSTEM SYS < BASIC.SYSTEM
-	$(AC) -p $(HD) COPYIIPLUS.7.2 SYS < COPYIIPLUS.7.2
+$(DISK): PRODOS QUIT.SYSTEM BITSY.BOOT BASIC.SYSTEM COPYIIPLUS.7.2
+	$(AC) -d $(DISK) PRODOS
+	#$(AC) -d $(DISK) QUIT.SYSTEM
+	#$(AC) -d $(DISK) BITSY.BOOT
+	$(AC) -d $(DISK) BASIC.SYSTEM
+	$(AC) -d $(DISK) COPYIIPLUS.7.2
+	$(AC) -p $(DISK) PRODOS SYS < PRODOS
+	#$(AC) -p $(DISK) QUIT.SYSTEM SYS < QUIT.SYSTEM
+	#$(AC) -p $(DISK) BITSY.BOOT SYS < BITSY.BOOT
+	$(AC) -p $(DISK) BASIC.SYSTEM SYS < BASIC.SYSTEM
+	$(AC) -p $(DISK) COPYIIPLUS.7.2 SYS < COPYIIPLUS.7.2
 
 PRODOS: $(PRODOS_DSK)
 	$(AC) -g $(PRODOS_DSK) PRODOS PRODOS
