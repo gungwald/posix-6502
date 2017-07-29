@@ -19,7 +19,7 @@ LDFLAGS=-t $(CC65_TARGET)
 DISK_VOL=posix
 DISK=$(DISK_VOL).dsk
 #DISK=../test/testhd.hdv
-PGMS=cat chartest date delkeyhndlr vi more uname od hex2dec mapdel2bkspc helloworld
+PGMS=textfileexample cat chartest date delkeyhndlr vi more uname od hex2dec mapdel2bkspc helloworld
 BASIC_AUX_TYPE=0x0801
 READ_TIME_LOAD_ADDR=0x0260
 AC=java -jar ../lib/AppleCommander-1.3.5.14.jar
@@ -33,13 +33,15 @@ all: $(PGMS)
 test: $(PGMS)
 	(cd ../test; make)
 
-cat: cat.o $(DISK)
+textfileexample: textfileexample.o $(DISK)
 	$(CC) $(LDFLAGS) -o $@ $<
 	$(AC) -d $(DISK) $@
 	$(AC) -cc65 $(DISK) $@ BIN < $@
 
-cat.o: cat.c
-
+cat: cat.o $(DISK)
+	$(CC) $(LDFLAGS) -o $@ $<
+	$(AC) -d $(DISK) $@
+	$(AC) -cc65 $(DISK) $@ BIN < $@
 
 chartest: chartest.o $(DISK)
 	$(CC) $(LDFLAGS) -o $@ $<

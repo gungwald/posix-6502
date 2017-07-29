@@ -1,12 +1,14 @@
+#include <ctype.h>      /* isgraph */
+#include <errno.h>      /* errno */
+#include <stdbool.h>    /* bool, true, false */
+#include <string.h>     /* strlen */
 #include <stdio.h>      /* stdin, stdout, printf, puts, fgets, fopen, 
                            fclose, FILENAME_MAX,EOF */
-#include <string.h>     /* strlen */
-#include <stdbool.h>    /* bool, true, false */
-#include <errno.h>      /* errno */
 #include <apple2.h>     /* _filetype, _auxtype */
 
 #define PATH_CAPACITY   (FILENAME_MAX+1)
 #define LINE_CAPACITY   256
+#define IS_EOF_LINE(s)  (strcmp(s, "\x04\n") == 0)
 
 void printError(const char *op, const char *param, int errorNum);
 void fcat(FILE *in, const char *inName, FILE *out, const char *outName);
@@ -18,19 +20,37 @@ void cat(char *inputName, char *outputName);
 char *readLine(FILE *f, const char *inputName, char *line);
 bool writeStuff(FILE *out, const char *outName, const char *data);
 char *chomp(char *line);
+void dumpString(const char *label, const char *s, size_t size);
 
 char line[LINE_CAPACITY];
 char inputFileName[PATH_CAPACITY];
 char outputFileName[PATH_CAPACITY];
 char blah[PATH_CAPACITY];
 
+void dumpString(const char *label, const char *s, size_t size)
+{
+    size_t i = 0;
+    char c;
+
+    printf("%s: length=%d: ", label, strlen(s));
+
+    for (c = s[i]; i < size; c = s[++i])
+        if (isgraph(c))
+            printf("%c ", c);
+        else
+            printf("0x%02X ", c);
+
+    putchar('\r');
+}
+
+/* A newline represents Enter/Return for cc65 */
 char *chomp(char *line)
 {
     size_t i;
 
     i = strlen(line);
     while (i > 0)
-        if (line[--i] == '\r')
+        if (line[--i] == '\r' || line[i] == '\n')
             line[i] = '\0';
         else
             break;
@@ -54,6 +74,7 @@ char *readLine(FILE *f, const char *inputName, char *line)
     return result;
 }
 
+/* The name 'write' can't be used or all output will fail. */
 bool writeStuff(FILE *out, const char *outName, const char *data)
 {
     size_t len;
@@ -70,7 +91,7 @@ bool writeStuff(FILE *out, const char *outName, const char *data)
 void fcat(FILE *in, const char *inName, FILE *out, const char *outName)
 {
     while (readLine(in, inName, line) != NULL)
-        if (! writeStuff(out, outName, line))
+        if (IS_EOF_LINE(line) || ! writeStuff(out, outName, line))
             break;
 }
 
