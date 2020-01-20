@@ -22,7 +22,7 @@ DISK=$(DISK_VOL).dsk
 PGMS=cat chartest date delkeyhndlr vi more uname od hex2dec mapdel2bkspc helloworld
 BASIC_AUX_TYPE=0x0801
 READ_TIME_LOAD_ADDR=0x0260
-AC=java -jar ../lib/AppleCommander-1.4.0.jar.java5.jar
+AC=java -jar ../lib/AppleCommander-ac-1.4.0.jar.java5.jar
 SYS_LOAD_ADDR=0x2000
 BIN_LOAD_ADDR=0x0803
 
