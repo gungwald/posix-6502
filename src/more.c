@@ -158,7 +158,7 @@ char *input_file_name()
 {
     static char *file_name;
 
-    file_name = interactively_read_line("File: ");
+    file_name = interactively_read_line("FILE:");
     return file_name;
 }
 
