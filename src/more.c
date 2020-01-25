@@ -41,44 +41,25 @@ TODO
 #include <ctype.h>      /* tolower */
 #include <conio.h>      /* screensize, revers */
 
-/* Maximum partial pathname for ProDOS is 64 bytes without a nul
-   terminator but including slashes. 
-   ProDOS automatically adds the Prefix, which can also be 64 bytes, for 
-   a maximum length of 128 bytes. As you can see, this will be 
-   problematic. The only way to get to the full 128 bytes is to set
-   the Prefix because you can't specify 128 bytes in a pathname, but
-   only 64. Fun? */
-#define MAX_PATH 64
+#include "characters.h"
+#include "consoleio.h"
 
-/* 65 characters are needed for the MAX_PATH plus a nul byte. */
-#define PATH_CAPACITY 65
-#define LINE_CAPACITY 128
-#define CARRIAGE_RETURN '\r'
+#define STRING_SIZE 128
 
-/* NULL_CHAR is defined to be the character with ASCII Code zero. This is
-   different from the NULL constant defined by C, which is a pointer to 
-   address 0. Their values are both zero, but their types are different.
-   NULL is type 'void *' while NULL_CHAR is type 'char'. */
-const char NULL_CHAR        = '\0'; 
-const char LINE_FEED        = '\n';     /* Formal name for a new line character */
-const char DELETE           = '\x7f';   /* Decimal 127 */
-
-char *input_file_name(void);
+char *input_file_name(char fileName[], size_t fileNameSize);
 void more(char *file_name);
 uint8_t chomp(char *line);
 char *trunc(char *s, size_t max_len);
 uint8_t display_line(const char *s);
-void erase_backward(uint8_t count);
 
 /* Have to use global variables because local variable capacity
    is limited. */
 unsigned char screen_width;
 unsigned char screen_height;
-char line[LINE_CAPACITY];
 
 int main(int argc, char *argv[])
 {
-    char *file_name;
+    static char fileName[STRING_SIZE];
     uint8_t i;
 
     screensize(&screen_width, &screen_height);
@@ -89,9 +70,9 @@ int main(int argc, char *argv[])
     if (argc <= 1) {
         /* ProDOS doesn't support piping input/output so, if there are no 
            arguments, ask for a file name. */
-        file_name = input_file_name();
-        if (file_name != NULL && strcmp(file_name,"")!=0) {
-            more(file_name);
+        input_file_name(fileName, sizeof(fileName));
+        if (fileName != NULL && strcmp(fileName,"")!=0) {
+            more(fileName);
         }
     }
     else {
@@ -103,63 +84,11 @@ int main(int argc, char *argv[])
     return EXIT_SUCCESS;
 }
 
-char interactively_read_char()
+char *input_file_name(char fileName[], size_t fileNameSize)
 {
-    unsigned char x;
-    char c;
-
-    x = wherex();
-
-    revers(true);
-    cputc(' ');
-    gotox(x);
-    c = cgetc();
-
-    revers(false);
-    cputc(' ');
-    gotox(x);
-    return c;
-}
-
-char *interactively_read_line(const char *prompt)
-{
-    const char DELETE = '\x7f';
-    const char BACKSPACE = '\x08';
-    bool line_is_complete = false;
-    char c;
-    size_t count = 0;
-
-    cputs(prompt);
-
-    while (! line_is_complete) {
-        c = interactively_read_char();
-        if (count > 0 && (c == DELETE || c == BACKSPACE)) {
-            erase_backward(1);
-            count--;
-        }
-        else if (c == '\r') {
-            line[count] = '\0';
-            line_is_complete = true;
-        }
-        else if (count < LINE_CAPACITY - 1) {
-            cputc(c);
-            line[count++] = c;
-        }
-        else {
-            line[count] = '\0';
-            line_is_complete = true;
-        }
-    }
-    cputs("\r\n");
-    return line;
-}
-
-char *input_file_name() 
-{
-    static char *file_name;
-
-    file_name = interactively_read_line("FILE:");
-    return file_name;
+    printf("FILE:");
+    cioReadLine(fileName, sizeof(line));
+    return fileName;
 }
 
 uint8_t display_line(const char *line)
@@ -176,14 +105,6 @@ uint8_t display_line(const char *line)
     return line_count;
 }
 
-void erase_backward(uint8_t count)
-{
-    cclear(1); /* Erase cursor */
-    gotox(wherex() - (count + 1));
-    cclear(count);
-    gotox(wherex() - count);
-}
-    
 uint8_t display_control_line(uint8_t line_count)
 {
     char c;
@@ -192,7 +113,7 @@ uint8_t display_control_line(uint8_t line_count)
     cputs("--More--");
     revers(false);
     c = tolower(cgetc());
-    erase_backward(8);
+    cioEraseBackwards(8);
     switch (c) {
         case 'b':
             /* Go back one page.*/
