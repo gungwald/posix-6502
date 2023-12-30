@@ -158,6 +158,13 @@ void more(char *file_name)
 
 /**
  * Removes any line terminating characters at the end of 'line'.
+ * <p>
+ * This is written to be as efficient as possible on the Apple II:
+ * <ol>
+ * <li>Using array subscripts instead of pointers</li>
+ * <li>Using pre-increments instead of post-increments</li>
+ * <li>Doing the absolute minimum work possible to achieve the goal</li>
+ * </ol>
  *
  * @param   line    The line from which terminators should be removed.
  *
@@ -165,7 +172,8 @@ void more(char *file_name)
  *          <p>
  *          On ProDOS the
  *          line terminator sequence is a single carriage
- *          return (ASCII code 13).
+ *          return (ASCII code 13). cc65 converts this to a '\n' on
+ *          input.
  *          <p>
  *          On Windows the sequence is a 2-character pair,
  *          a carriage return and a line feed. So, where Perl
@@ -175,24 +183,24 @@ void more(char *file_name)
  */
 uint8_t chomp(char *line)
 {
-    size_t i;
-    size_t count = 0;
-
-    i = strlen(line);
     /* i cannot be allowed to go negative because it is unsigned.
-       This is the only loop that guarantees i stays positive.
+       This is the only loop that guarantees i stays positive, or zero.
        If an "i >= 0" condition is used, i must go negative to
-       exit the loop. We don't want that. */
-    while (i > 0) {
-        --i;
-        if (line[i] == '\r' || line[i] == '\n') {
-            line[i] = '\0';
-            ++count;
-        }
-        else {
-            break;
-        }
+       exit the loop. We don't want that because it will underflow and
+       the loop will never exit. */
+    size_t i;
+    size_t len;
+
+    /* Only determine the length of the line once because to determine the
+       length, strlen has to look through every character in the line. It
+       would be a waste of CPU time to do it more than once */
+    i = len = strlen(line);
+    if (len > 0) {
+        /* Don't waste CPU time writing a string terminator '\0' until the last 
+           line terminator '\r' or '\n' is found. */
+        while (i > 0 && (line[--i] == '\r' || line[i] == '\n')); /* end */
+        line[++i] = '\0'; /* Terminated */
     }
-    return count;
+    return len - i;
 }
 

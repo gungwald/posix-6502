@@ -46,14 +46,11 @@ void dumpString(const char *label, const char *s, size_t size)
 /* A newline represents Enter/Return for cc65 */
 char *chomp(char *line)
 {
-    size_t i;
+    size_t i; /* Cannot be allow to go lower than 0 or it will underflow */
 
     i = strlen(line);
-    while (i > 0)
-        if (line[--i] == '\r' || line[i] == '\n')
-            line[i] = '\0';
-        else
-            break;
+    while (i > 0 && (line[--i] == '\r' || line[i] == '\n'))
+        line[i] = '\0';
 
     return line;
 }
